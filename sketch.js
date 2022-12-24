@@ -154,3 +154,17 @@ function draw() {
         textSize(30);
         text("Press enter to return to main menu..",100,550);
     }
+
+        else {
+        // jika user belum menekan tombol play, program akan menampilkan main menu
+        if (!play) {
+            draw_menu();
+        } else {
+        setTimeout(function() {
+            background(0);
+            // memanggil fungsi playGame() untuk menjalankan game
+            playGame();
+        }, 3000);
+        }
+    }
+}
