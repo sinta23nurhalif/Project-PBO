@@ -206,3 +206,92 @@ function playGame() {
     if (at_x > 700) {
         isAttack = false;
     }
+// menggambar hero pada layar
+    hero.draw();
+    // menambah jumlah monster sesuai level saat ini
+    if(monster_count < level.getCurrentLevel()){
+        // mendefinisikan objek monster dari class Monster serta inisialisasi objek monster
+        mons[monster_count] = new Monster(50,60);
+        mons[monster_count].setTypeEffect(1,'fire','blue');
+        mons[monster_count].initImg(m[getRndInteger(0,3)], getRndInteger(400,720), getRndInteger(10,550));
+        // menambah jumlah variabel monster_count untuk menyatakan jumlah monster
+        monster_count++;
+        // menggerakan monster secara random dengan memanggil fungsi moveRandom()
+        for(let a = 0; a< monster_count; a++){
+            mons[a].moveRandom();
+        }
+    }
+    // menggambar monster pada layar
+    for(let a = 0; a< monster_count; a++){
+        mons[a].draw();
+    }
+    // menggerakan monster secara random dalam interval waktu tertentu
+    if(count_onplay % 200 == 1){
+        for(let a = 0; a< monster_count; a++){
+            mons[a].moveRandom();
+        }
+    }
+    // monster attack dalam interval waktu tertentu
+    if(count_onplay % 500 == 1){
+        for(let a = 0; a< monster_count; a++){
+            ismAttack[a] = true;
+            atm_x[a] = mons[a].x;  
+            atm_y[a] = mons[a].y;
+        }
+    }
+    for(let a = 0; a< monster_count; a++){
+        // ketika monster sedang melakukan attack, maka attack akan bergerak ke kiri
+        if (ismAttack[a]) {
+            atm_x[a] -= 2;
+            mons[a].attack(atm, atm_x[a], atm_y[a]);
+        }
+        // jika serangan melebihi lebar layar, maka attack = false
+        if (atm_x[a] < 0) {
+            ismAttack[a] = false;
+        }
+        // jika attack dari hero mengenai monster
+        if (((at_y >= mons[a].y-30)&&(at_y <= mons[a].y+30))&&((at_x >= mons[a].x-20)&&(at_x <= mons[a].x+20))){
+            at_y = -100;
+            at_x = -100;
+            isAttack = false;
+            // menambahkan score pada hero
+            hero.increaseScore();
+            // mengurangi nyawa monster yang terkena attack
+            mons[a].life--;
+            // menyamakan latest level ke current level
+            if(level.getCurrentLevel() != level.getLatestLevel()){
+                level.latestLevel = level.currentLevel;
+            }
+            // jika ada monster yang mati, maka jumlah monster pada variabel monster_count akan dikurangi
+            if(mons[a].life == 0){
+                mons.splice(a,1);
+                monster_count--;
+            }
+        }
+        // jika attack monster mengenai hero
+        if (((atm_y[a] >= hero.y-30)&&(atm_y[a] <= hero.y+50))&&((atm_x[a] >= hero.x)&&(atm_x[a] <= hero.x+110))){
+            atm_y[a] = -100;
+            atm_x[a] = -100;
+            // set attack monster = false
+            ismAttack[a] = false;
+            // mengurangi nyawa dari hero
+            hero.life--;
+        }
+    }
+    // jika skor dari hero kelipatan 200, maka level akan bertambah
+    if((hero.score > 0)&&(hero.score % 200 == 0)&&(level.getCurrentLevel() < level.maxLevel)){
+        level.setLevel(level.getLatestLevel()+1);
+    }
+    // jika nyawa hero = 0, gameover
+    if(hero.life == 0)
+    {
+        gameover = true;
+    }    
+    // melakukan saveScore dengan memanggil fungsi saveScore() dari class hero
+    hero.saveScore();
+    // melakukan perhitungan nyawa hero
+    hero.calculateLife(lv);
+    // menampilkan level ke layar
+    level.showLevel();
+    count_onplay++;
+}
