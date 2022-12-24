@@ -140,3 +140,17 @@ class Monster extends Entity {
             this.y++;
         image(this.img, this.x, this.y);
     }
+    // fungsi untuk monster melakukan attack
+    attack(fire, x, y) {
+        this.fire = fire;
+        this.fire.resize(50, 40);
+        image(this.fire, x, y);
+    }
+    // fungsi untuk menyimpan dan menampilkan score pada layar
+    saveScore() { 
+        fill(255,255,255);
+        textFont("Comic Sans MS");
+        textSize(30);
+        text("Score : "+this.score,20,35);
+    }
+}
