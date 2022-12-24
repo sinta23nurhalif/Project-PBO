@@ -164,3 +164,10 @@ class Hero extends Entity {
         this.life = 5;
         this.score = 0;
     }
+    // fungsi untuk menginisialisasi gambar dari hero (astronot)
+    initImg(i, x, y) {
+        this.img = i;
+        this.img.resize(this.width, this.height);
+        this.x = x;
+        this.y = y;
+    }
