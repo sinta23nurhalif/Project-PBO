@@ -97,3 +97,18 @@ function mouseClicked() {
         fill(255, 255, 255);
         text('Ready', 190, 250);
         image(hint, 70,350);
+setTimeout(function () {
+            background(0);
+            fill(255, 255, 50);
+            text('Set', 240, 250);
+            image(hint, 70,350);
+        }, 1000);
+        setTimeout(function () {
+            background(0);
+            fill(255, 50, 50);
+            text('Go!', 270, 250);
+            image(hint, 70,350);
+        }, 2000);
+        play = true;
+    }
+}
