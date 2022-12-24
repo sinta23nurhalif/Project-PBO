@@ -138,3 +138,19 @@ function setup() {
     noCursor();
 
 }
+// fungsi utama untuk melakukan draw object ke canvas
+function draw() {
+    // jika game over maka akan menampilkan teks "game over" dan score saat ini
+    if(gameover){
+        background(0);
+        fill(250,0,0);
+        textFont("Comic Sans MS");
+        textSize(100);
+        text("Game Over!",100,200);
+        fill(200,200,200);
+        textSize(50);
+        text("Score : "+ hero.score,230,350);
+        fill(200,200,50);
+        textSize(30);
+        text("Press enter to return to main menu..",100,550);
+    }
