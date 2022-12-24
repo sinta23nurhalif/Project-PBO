@@ -154,3 +154,13 @@ class Monster extends Entity {
         text("Score : "+this.score,20,35);
     }
 }
+class Hero extends Entity {
+    life;   // variabel nyawa hero
+    score;  // variabel untuk menyimpan score hero
+    fire;   // variabel untuk gambar dari attack hero
+    constructor(w, h) {
+        // inisialisasi nyawa dan score hero
+        super(w, h);
+        this.life = 5;
+        this.score = 0;
+    }
