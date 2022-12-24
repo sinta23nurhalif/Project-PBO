@@ -171,3 +171,19 @@ class Hero extends Entity {
         this.x = x;
         this.y = y;
     }
+    // fungsi untuk hero melakukan attack berdasarkan koordinat x dan y hero saat ini
+    attack(fire, x, y) {
+        this.fire = fire;
+        this.fire.resize(70, 60);
+        image(this.fire, x, y);
+    }
+    // fungsi untuk menambah score hero
+    increaseScore() {
+        this.score += 10;
+    }
+    // fungsi untuk menghitung dan menyimpan nyawa hero
+    calculateLife(lv_img) {
+        lv_img.resize(30,30);
+        for(let x=0;x<this.life;x++)
+            image(lv_img,300 + x*35,10)
+    }
