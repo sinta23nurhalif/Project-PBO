@@ -128,3 +128,15 @@ class Monster extends Entity {
         this.rand_x = getRndInteger(400,720);
         this.rand_y = getRndInteger(10,550);
     }
+// fungsi untuk menggambar monster pada layar sesuai koordinat x dan y
+    draw() {
+        if(this.x > this.rand_x)
+            this.x--;
+        else if(this.x < this.rand_x)
+            this.x++;
+        if(this.y > this.rand_y)
+            this.y--;
+        else if(this.y < this.rand_y)
+            this.y++;
+        image(this.img, this.x, this.y);
+    }
