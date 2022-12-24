@@ -187,3 +187,11 @@ class Hero extends Entity {
         for(let x=0;x<this.life;x++)
             image(lv_img,300 + x*35,10)
     }
+    // fungsi untuk menyimpan score hero dan menampilkan pada layar
+    saveScore() {
+        fill(255,255,255);
+        textFont("Comic Sans MS");
+        textSize(30);
+        text("Score : "+this.score,20,35);
+    }
+}
