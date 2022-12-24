@@ -122,3 +122,19 @@ function keyPressed(){
         }
     }
 }
+
+function setup() {
+    createCanvas(750, 600);
+    // pendefinisian object dari class Map
+    mp = new Map(2250, 600);
+    // pendefinisian object dari class level dengan nilai max_level = 10
+    level = new Level(10);
+    // melakukan set level awal ke 1
+    level.setLevel(1);
+    // pendefinisian object dari class Hero (extends Entity)
+    hero = new Hero(120, 90);
+    // memanggil fungsi untuk setting image dari hero serta koordinat awal posisi hero
+    hero.initImg(hr, 50, 250);
+    noCursor();
+
+}
