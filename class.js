@@ -64,3 +64,67 @@ class Entity {
     x;      // mendefinisikan posisi horizontal objek
     y;      // mendefinisikan posisi vertikal objek
     img;    // mendefinisikan gambar objek
+    constructor(w, h) {
+        // set lebar dan tinggi objek
+        this.width = w;
+        this.height = h;
+    }
+    // mendefinisikan fungsi attack, hanya pendefinisian saja, untuk action di override oleh child class
+    attack() {}
+    // fungsi untuk objek bergerak ke kanan
+    moveRight() {
+        if (this.x < 250) 
+            this.x += 3;
+    }
+    // fungsi untuk objek bergerak ke kiri
+    moveLeft() {
+        if (this.x > 0) 
+            this.x -= 3;
+    }
+    // fungsi untuk objek bergerak ke bawah
+    moveDown() {
+        if (this.y < 511) 
+            this.y += 3;
+    }
+    // fungsi untuk objek bergerak ke atas
+    moveUp() {
+        if (this.y > 0) 
+            this.y -= 3;
+    }
+    // fungsi untuk menggambar objek ke layar
+    draw() {
+        image(this.img, this.x, this.y);
+    }
+}
+
+class Monster extends Entity {
+    life;   // variabel untuk nyawa monster
+    color;  // variabel untuk warna monster
+    effect; // variabel untuk effect yang diberikan monster
+    type;   // variabel untuk tipe monster
+    rand_x; // variabel untuk menyimpan nilai random koordinat horizontal monster
+    rand_y; // variabel untuk menyimpan nilai random koordinat vertikal monster
+    fire;   // variabel untuk menyimpan gambar attack dari monster
+    constructor(w, h) {
+        // set nyawa monster
+        super(w, h);
+        this.life = 5;
+    }
+    // fungsi untuk inisialisasi gambar monster, ukuran lebar x tinggi serta koordinat x dan y
+    initImg(i, x, y) {
+        this.img = i;
+        this.img.resize(this.width, this.height);
+        this.x = x;
+        this.y = y;
+    }
+    // fungsi untuk inisialisasi warna, tipe dan effect
+    setTypeEffect(type, effect, color) {
+        this.color = color;
+        this.type = type;
+        this.effect = effect;
+    }
+    // fungsi untuk mengubah posisi monster secara random
+    moveRandom() {
+        this.rand_x = getRndInteger(400,720);
+        this.rand_y = getRndInteger(10,550);
+    }
