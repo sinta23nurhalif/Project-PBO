@@ -168,3 +168,41 @@ function draw() {
         }
     }
 }
+// fungsi ketika user memainkan game
+function playGame() {
+    // inisialisasi map dengan background dari variabel bg
+    mp.init(bg);
+    // menggerakan map 
+    mp.move();
+    // membaca input keyboard dari user
+    if (keyIsDown(87)) {    // input huruf w untuk keatas
+        hero.moveUp();
+    }
+    if (keyIsDown(83)) {    // input huruf s untuk kebawah
+        hero.moveDown();
+    }
+    if (keyIsDown(68)) {    // input huruf d untuk kekanan
+        hero.moveRight();
+    }
+    if (keyIsDown(65)) {    // input huruf a untuk kekiri
+        hero.moveLeft();
+    }
+    if (keyIsDown(32)) {    // input spasi untuk attack
+        // jika hero tidak dalam posisi attack, dapat melakukan attack dengan set variabel isAttack ke true
+        if (isAttack == false) {
+            isAttack = true;
+            // mengisi value koordinat attack oleh hero
+            at_y = hero.y;
+            at_x = hero.x + 80;
+        }
+    }
+    if (isAttack) {
+        // jika hero sedang melakukan attack
+        at_x += 10;
+        // memanggil fungsi attack() dari class hero
+        hero.attack(at, at_x, at_y);
+    }
+    // jika attack melebihi lebar map
+    if (at_x > 700) {
+        isAttack = false;
+    }
